@@ -25,6 +25,14 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
+       <li class="treeview" ng-show="vm.can('manage.users')">
+        <a href="javascript:void(0)">
+          <i class="fa fa-cutlery"></i> <span>Restaurants</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li ng-show="vm.can('manage.users')" class="active"><a ui-sref='app.userorder'><i class="fa fa-circle-o"></i> <span>Order</span></a></li>
+        </ul>
+      </li>
       <li class="treeview" ng-show="vm.can('manage.users')">
         <a href="javascript:void(0)">
           <i class="fa fa-users"></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i>
