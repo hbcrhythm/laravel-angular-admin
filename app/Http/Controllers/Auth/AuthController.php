@@ -11,6 +11,7 @@ use JWTAuth;
 use Mail;
 use Socialite;
 
+use Log;
 class AuthController extends Controller
 {
     /**

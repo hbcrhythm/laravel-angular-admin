@@ -6,7 +6,6 @@ class UserEditController {
     this.formSubmitted = false
     this.alerts = []
     this.userRolesSelected = []
-
     if ($stateParams.alerts) {
       this.alerts.push($stateParams.alerts)
     }
