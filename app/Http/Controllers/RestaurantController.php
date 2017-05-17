@@ -50,19 +50,7 @@ class RestaurantController extends Controller
 	 */
 	public function getIndex () {
 
-		$restaurant = Restaurant::with('users')->get();
-
-		// $arrKind = array();
-		// foreach ($restaurant as $value) {
-			
-		// 	if(empty($arrKind[$value->seller])){
-		// 		$arrKind[$value->seller]['rmb'] = 0;
-		// 		$arrKind[$value->seller]['count'] = 0;
-		// 	}
-
-		// 	$arrKind[$value->seller]['rmb'] += $value->price;
-		// 	$arrKind[$value->seller]['count'] += 1;
-		// }
+		$restaurant = Restaurant::with('users')->orderBy('seller', 'desc')->get();
 
 		return response()->success(compact('restaurant'));
 	}
@@ -82,7 +70,13 @@ class RestaurantController extends Controller
 			$arrKind[$value->seller]['count'] += 1;
 		}
 
-		$statistics = $attKind;
+		foreach ($arrKind as $key => $value) {
+			$subKind['name'] = $key;
+			$subKind['rmb'] = $value['rmb'];
+			$subKind['count'] = $value['count'];
+			$statistics[] = $subKind;
+		}
+
 		return response()->success(compact('statistics'));
 	}
 
