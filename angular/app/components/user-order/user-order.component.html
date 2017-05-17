@@ -8,21 +8,45 @@
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12 col-md-7">
-			<div class="box box-primary">
+			<div class="box box-default">
 				<div class="box-header with-border">
 		          <h3 class="box-title">User Order</h3>
 		        </div>
-		        <form class="form-horizontal" name="orderForm" novalidate>
-		        <div class="box-body">
-		        	<div class="form-group">
-		        		<label for="inputEmail" class="col-sm2 control-label"></label>
-		        		<input type="text" name="variety">
-		        	</div>
+		        <form class="form-horizontal" name="orderForm" ng-submit="vm.save(orderForm.$valid)" novalidate>
+			        <div class="box-body">
+			        	<div ng-if="vm.alerts" class="alert alert-{{alert.type}}" ng-repeat="alert in vm.alerts">
+			        		<h4>{{alert.title}}</h4>
+			        		<p>{{alert.msg}}</p>
+			        	</div>
+			        	<div class="form-group" ng-class="{ 'has-error': orderForm.variety.$invalid}">
+			        		<label for="variety" class="col-sm-2 control-label">菜品</label>
+			        		<div class="col-sm-10">
+			        			<input type="text" class="form-control" ng-model="vm.variety" name="variety" id="variety" placeholder="variety" required>
+			        			<p ng-show="orderForm.name.$error.required" class="help-block">必须填写菜品。</p>
+			        		</div>
+			        	</div>
 
-		        </div>
-		        <div class="box-footer">
-		        	<button type="submit" class="btn btn-primary pull-right">confirm</button>
-		        </div>
+			        	<div class="form-group" ng-class="{ 'has-error': orderForm.price.$invalid}">
+			        		<label for="price" class="col-sm-2 control-label">价格</label>
+			        		<div class="col-sm-10">
+			        			<input type="text" class="form-control" ng-model="vm.price" name="price" id="price" placeholder="price" required>
+			        			<p ng-show="orderForm.price.$error.required" class="help-block">必须填写价格</p>
+			        		</div>
+			        	</div>
+
+			        	<div class="form-group" ng-class="{ 'has-error': orderForm.seller.$invalid}">
+			        		<label for="seller" class="col-sm-2 control-label">店家</label>
+			        		<div class="col-sm-10">
+				        		<input type="text" class="form-control" ng-model="vm.seller" name="seller" id="seller" placeholder="seller" required>
+				        		<p ng-show="orderForm.seller.$error.required" class="help-block">必须填写店家
+				        		</p>
+			        		</div>
+			        	</div>
+			        </div>
+
+			        <div class="box-footer">
+			        	<button type="submit" class="btn btn-default pull-right">confirm</button>
+			        </div>
 		        </form>
 			</div>
 		</div>		

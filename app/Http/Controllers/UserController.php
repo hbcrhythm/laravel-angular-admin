@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Input;
 use Validator;
 
+use Log;
+
 class UserController extends Controller
 {
     /**

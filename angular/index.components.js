@@ -27,6 +27,7 @@ import { ForgotPasswordComponent } from './app/components/forgot-password/forgot
 import { LoginFormComponent } from './app/components/login-form/login-form.component'
 import { RegisterFormComponent } from './app/components/register-form/register-form.component'
 import { UserOrderComponent } from './app/components/user-order/user-order.component'
+import { UserOrderListComponent } from './app/components/user-order-list/user-order-list.component'
 
 angular.module('app.components')
   .component('tablesSimple', TablesSimpleComponent)
@@ -58,3 +59,4 @@ angular.module('app.components')
   .component('loginForm', LoginFormComponent)
   .component('registerForm', RegisterFormComponent)
   .component('userOrder', UserOrderComponent)
+  .component('userOrderList', UserOrderListComponent)

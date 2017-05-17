@@ -37,3 +37,11 @@ $api->group(['middleware' => ['api', 'api.auth']], function ($api) {
 $api->group(['middleware' => ['api', 'api.auth', 'role:admin.super|admin.user']], function ($api) {
     $api->controller('users', 'UserController');
 });
+
+$api->group(['middleware' => ['api', 'api.auth']], function($api) {
+    $api->post('restaurant/order', 'RestaurantController@order');
+});
+
+$api->group(['middleware' => ['api', 'api.auth']], function($api){
+    $api->controller('restaurant', 'RestaurantController');
+});
