@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Validator;
 use Carbon\Carbon;
+use Excel;
 use Log;
 
 
@@ -80,6 +81,29 @@ class RestaurantController extends Controller
 		return response()->success(compact('statistics'));
 	}
 
+	public function getExcel () {
+		$restaurant = Restaurant::with('users')->orderBy('seller', 'desc')->get();
+		foreach ($restaurant as $value) {
+			$export[] = array(
+				'id' => $value['id'],
+				'名字' => $value['users']['name'],
+				'菜肴' => $value['variety'],
+				'价格' => $value['price'],
+				'店铺' => $value['seller'],
+				'下单时间' => $value['created_at']
+			);
+		}
+		Excel::create('Filename', function($excel) use($export) {
+    		 $excel->sheet('export', function($sheet) use ($export) {
+		        $sheet->fromArray($export);
+
+		    });
+    		 $excel->sheet('export1', function($sheet) use ($export) {
+		        $sheet->fromArray($export);
+
+		    });
+		})->store('xls');
+	}
 
 }
 ?>

@@ -54,6 +54,14 @@ class UserOrderListController {
 	}
 
 	$onInit () {}
+
+	click(){
+		let Excel = this.API.service('excel', this.API.all('restaurant'))
+		Excel.getList()
+			.then((response) => {
+				this.$log.info("success ！")
+			})
+	}
 }
 
 export const UserOrderListComponent = {
