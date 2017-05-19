@@ -35,11 +35,15 @@ elixir(function (mix) {
       './public/js/vendor.js',
       './public/js/partials.js',
       './public/js/app.js',
-      './public/dist/js/app.js'
+      './public/dist/js/app.js',
+      './node_modules/textangular/dist/textAngular-rangy.min.js',
+      './node_modules/textangular/dist/textAngular-sanitize.min.js',
+      './node_modules/textangular/dist/textAngular.min.js'
     ],
     styles = [
       './public/css/vendor.css',
-      './public/css/app.css'
+      './public/css/app.css',
+      './node_modules/textangular/dist/textAngular.css'
     ],
     karmaJsDir = [
       jsOutputFolder + '/vendor.js',
