@@ -28,6 +28,7 @@ import { LoginFormComponent } from './app/components/login-form/login-form.compo
 import { RegisterFormComponent } from './app/components/register-form/register-form.component'
 import { UserOrderComponent } from './app/components/user-order/user-order.component'
 import { UserOrderListComponent } from './app/components/user-order-list/user-order-list.component'
+import { UserOrderLogComponent } from './app/components/user-order-log/user-order-log.component'
 
 angular.module('app.components')
   .component('tablesSimple', TablesSimpleComponent)
@@ -60,3 +61,4 @@ angular.module('app.components')
   .component('registerForm', RegisterFormComponent)
   .component('userOrder', UserOrderComponent)
   .component('userOrderList', UserOrderListComponent)
+  .component('userOrderLog', UserOrderLogComponent)

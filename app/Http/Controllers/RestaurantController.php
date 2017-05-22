@@ -105,5 +105,11 @@ class RestaurantController extends Controller
 		})->store('xls');
 	}
 
+	public function getLog () {
+		$user = Auth::user();
+		$log = Restaurant::with('users')->where('role_id', $user['id'])->get();
+
+		return response()->success(compact('log'));
+	}
 }
 ?>

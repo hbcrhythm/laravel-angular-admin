@@ -179,6 +179,17 @@ export function RoutesConfig ($stateProvider, $urlRouterProvider) {
           }
         }
     })
+    .state('app.userorderlog', {
+        url: '/user-order-log',
+        data: {
+          auth:true
+        },
+        views: {
+          'main@app': {
+            template: '<user-order-log></user-order-log>'
+          }
+        }
+    })
     .state('app.userlist', {
       url: '/user-lists',
       data: {

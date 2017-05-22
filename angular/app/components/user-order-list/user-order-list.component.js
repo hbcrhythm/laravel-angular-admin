@@ -8,7 +8,7 @@ class UserOrderListController {
 			.then((response) => {
 
 				let dataSet = response.plain()
-				this.$log.info(dataSet)
+				
 				this.dtOptions1 = DTOptionsBuilder.newOptions()
 					.withOption('data', dataSet)
 					.withOption('createdRow', createdRow1)
@@ -59,9 +59,23 @@ class UserOrderListController {
 		let Excel = this.API.service('excel', this.API.all('restaurant'))
 		Excel.getList()
 			.then((response) => {
+				response
 				this.$log.info("success ！")
 			})
 	}
+	let datepicker = $('#datetimepicker').datetimepicker({}).on('dp.change', function(e){
+		var result = new moment(e.date).format('YYYY-MM-DD')
+		$scope.dateOne = result
+		$scope.$apply() 
+	})
+// let datepicker = $('#datetimepicker').datetimepicker({  
+// format: 'YYYY-MM-DD',  
+// locale: moment.locale('zh-cn')  
+// }).on('dp.change', function (e) {  
+// var result = new moment(e.date).format('YYYY-MM-DD') 
+// $scope.dateOne = result  
+// $scope.$apply() 
+// })
 }
 
 export const UserOrderListComponent = {
