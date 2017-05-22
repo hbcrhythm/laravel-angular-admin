@@ -21,7 +21,12 @@
 					<input type='text' class="form-control"  ng-model="dateOne"/>  
 					<span class="input-group-addon">  
                         <span class="glyphicon glyphicon-calendar"></span>  
-                    </span>  
+                    </span>
+                     <input type="text"
+                   class="form-control"
+                   ng-model="vm.dateTime"
+                   data-date-time-picker
+                    />  
 				</div>
 				<div class="box-body">
 					<table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions1" dt-columns="vm.dtColumns1"> 

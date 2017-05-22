@@ -2,7 +2,7 @@ class UserOrderListController {
 	constructor ($scope, API, $log, DTOptionsBuilder, DTColumnBuilder, $compile) {
 		this.API = API
 		this.$log = $log
-
+		this.datatime = {}
 		let Restaurants = this.API.service('restaurant')
 		Restaurants.getList()
 			.then((response) => {
@@ -63,11 +63,7 @@ class UserOrderListController {
 				this.$log.info("success ！")
 			})
 	}
-	let datepicker = $('#datetimepicker').datetimepicker({}).on('dp.change', function(e){
-		var result = new moment(e.date).format('YYYY-MM-DD')
-		$scope.dateOne = result
-		$scope.$apply() 
-	})
+
 // let datepicker = $('#datetimepicker').datetimepicker({  
 // format: 'YYYY-MM-DD',  
 // locale: moment.locale('zh-cn')  
