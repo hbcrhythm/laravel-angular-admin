@@ -12,21 +12,33 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">User Order List</h3>
 					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-success btn-xs" ng-click="vm.submit()"><i class="fa fa-send-o"></i> submit </button>
 						<button type="button" class="btn btn-box-tool" ng-click="vm.click()"><i class="fa fa-file-excel-o"></i></button>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 						<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 					</div>
 				</div>
 				<div class='input-group date' id='datetimepicker'>
-					<input type='text' class="form-control"  ng-model="dateOne"/>  
-					<span class="input-group-addon">  
-                        <span class="glyphicon glyphicon-calendar"></span>  
-                    </span>
-                     <input type="text"
-                   class="form-control"
-                   ng-model="vm.dateTime"
-                   data-date-time-picker
-                    />  
+                    <div class="row">
+                	<div class="col-md-6 col-xs-8">
+                    <label class="label label-info">开始时间</label>
+            		<br/>
+                    <input type="text"
+	                   class="form-control"
+	                   data-date-time-picker
+	                   data-date-time="vm.dateTime1"
+               		/> 
+               		</div>
+               		<div class="col-md-6 col-xs-8">
+               		<label class="label label-info">结束时间</label>
+            		<br/>
+                    <input type="text"
+	                   class="form-control"
+	                   data-date-time-picker
+	                   data-date-time="vm.dateTime2"
+               		/> 
+               		</div>
+             		</div>
 				</div>
 				<div class="box-body">
 					<table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions1" dt-columns="vm.dtColumns1"> 

@@ -29,7 +29,7 @@ class RestaurantController extends Controller
 
 		$user = Auth::user();
 
-		if(Restaurant::where('role_id', $user['id'])->where('created_at', '>=', Carbon::today())->where('created_at', '<=', Carbon::tomorrow())->first()){ 
+		if(Restaurant::where('role_id', $user['id'])->where('created_at', '>=', Carbon::today("Asia/Shanghai"))->where('created_at', '<=', Carbon::tomorrow("Asia/Shanghai"))->first()){ 
 			return response()->error('Today has been order');
 		};
 
@@ -81,6 +81,26 @@ class RestaurantController extends Controller
 		return response()->success(compact('statistics'));
 	}
 
+	public function postIndex(Request $request) {
+		
+		$this->validate($request, [
+			'starttime' => 'required',
+			'endtime' => 'required'
+		]);
+		
+		$only = $request->only('starttime', 'endtime');
+		Log::info("postindex");
+		Log::info($only);
+		Log::info(Carbon::createFromTimestamp($only['starttime'], "Asia/Shanghai"));
+		Log::info(Carbon::createFromTimestamp($only['endtime'], "Asia/Shanghai"));
+
+		$restaurant = Restaurant::with('users')
+		->where('created_at', '>=', Carbon::createFromTimestamp($only['starttime'], "Asia/Shanghai"))
+		->where('created_at', '<=', Carbon::createFromTimestamp($only['endtime'], "Asia/Shanghai"))->orderBy('seller', 'desc')->get();
+
+		return response()->success(compact('restaurant'));
+	}
+
 	public function getExcel () {
 		$restaurant = Restaurant::with('users')->orderBy('seller', 'desc')->get();
 		foreach ($restaurant as $value) {
@@ -103,6 +123,8 @@ class RestaurantController extends Controller
 
 		    });
 		})->store('xls');
+		$excel[] = "ok";
+		return response()->success(compact('excel'));
 	}
 
 	public function getLog () {
