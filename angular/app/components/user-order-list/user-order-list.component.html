@@ -40,8 +40,11 @@
                		</div>
              		</div>
 				</div>
+				 <p>
+        <button class="btn btn-primary" ng-click="vm.dtInstance.changeData(vm.newPromise(vm.Restaurants))">Rerender</button>
+    </p>
 				<div class="box-body">
-					<table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions1" dt-columns="vm.dtColumns1"> 
+					<table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions1" dt-columns="vm.dtColumns1" dt-instance="vm.dtInstance"> 
 					</table>
 				</div>
 			</div>

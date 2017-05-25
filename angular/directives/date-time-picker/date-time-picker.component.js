@@ -10,7 +10,7 @@ function dateTimePickerClass($rootScope) {
             location: '@',
             dateTime: '='
         },
-        link: function (scope, elem, attrs) {
+        link: function (scope, elem) {
             elem.datetimepicker({
                 pick12HourFormat: scope.pick12HourFormat,
                 language: scope.language,
@@ -21,14 +21,14 @@ function dateTimePickerClass($rootScope) {
             //Local event change
             elem.on('blur', function () {
 
-                console.info('this', this);
-                console.info('scope', scope);
-                console.info('attrs', attrs);
-                console.info('input', elem.data("DateTimePicker").date().format());
+                // console.info('this', this);
+                // console.info('scope', scope);
+                // console.info('attrs', attrs);
+                // console.info('input', elem.data("DateTimePicker").date().format());
                 
                 // returns moments.js format object
                 scope.dateTime = Date.parse(new Date(elem.data("DateTimePicker").date().format())) / 1000;
-                console.log('input ', scope.dateTime);
+                // console.log('input ', scope.dateTime);
 
                 // Global change propagation
                 $rootScope.$broadcast("dateTimePicker", {
