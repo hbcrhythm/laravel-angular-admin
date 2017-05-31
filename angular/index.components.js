@@ -29,6 +29,9 @@ import { RegisterFormComponent } from './app/components/register-form/register-f
 import { UserOrderComponent } from './app/components/user-order/user-order.component'
 import { UserOrderListComponent } from './app/components/user-order-list/user-order-list.component'
 import { UserOrderLogComponent } from './app/components/user-order-log/user-order-log.component'
+import { UserWeekLogComponent } from './app/components/user-week-log/user-week-log.component'
+import { UserWeekLogListComponent } from './app/components/user-week-log-list/user-week-log-list.component'
+import { UserWeekLogManagerComponent } from './app/components/user-week-log-manager/user-week-log-manager.component'
 
 angular.module('app.components')
   .component('tablesSimple', TablesSimpleComponent)
@@ -62,3 +65,6 @@ angular.module('app.components')
   .component('userOrder', UserOrderComponent)
   .component('userOrderList', UserOrderListComponent)
   .component('userOrderLog', UserOrderLogComponent)
+  .component('userWeekLog', UserWeekLogComponent)
+  .component('userWeekLogList', UserWeekLogListComponent)
+  .component('userWeekLogManager', UserWeekLogManagerComponent)

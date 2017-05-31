@@ -9,92 +9,68 @@ class UserOrderListController {
 		this.$compile = $compile
 		this.dateTime1 = ""
 		this.dateTime2 = ""
+		this.dateTime3 = ""
+		this.dateTime4 = ""
 		this.dtInstance = {}
-
+		this.dtInstance1 = {}
 
 		let Restaurants = this.API.service('restaurant')
-		this.Restaurants = Restaurants
-		Restaurants.getList()
-			.then((response) => {
-				console.log(response)
-				let dataSet = response.plain()
-				
-				this.dtOptions1 = DTOptionsBuilder.fromFnPromise(function() {
-					return Restaurants.getList()
-				}).withPaginationType('full_numbers').withDataProp('data')
 
-				this.dtColumns1 = [
-					DTColumnBuilder.newColumn('seller').withTitle('店铺'),
-					DTColumnBuilder.newColumn('users.name').withTitle('小主'),
-					DTColumnBuilder.newColumn('variety').withTitle('菜肴'),
-					DTColumnBuilder.newColumn('price').withTitle('RMB')
-				]
+		this.dtOptions1 = DTOptionsBuilder.fromFnPromise(function() {
+			return Restaurants.getList()
+		}).withPaginationType('full_numbers').withDataProp('data')
 
-				this.displayTable = true
-			})
+		this.dtColumns1 = [
+			DTColumnBuilder.newColumn('seller').withTitle('店铺'),
+			DTColumnBuilder.newColumn('users.name').withTitle('小主'),
+			DTColumnBuilder.newColumn('variety').withTitle('菜肴'),
+			DTColumnBuilder.newColumn('price').withTitle('RMB')
+		]
 
-			// this.createdRow1 = (row) => {
-			// 	$compile(angular.element(row).contents())($scope)
-			// }
+		this.displayTable = true
 
+		let Statistics = this.API.service('statistics', this.API.all('restaurant'))
+		this.dtOptions2 = DTOptionsBuilder.fromFnPromise(function() {
+			return Statistics.getList()
+		}).withPaginationType('full_numbers').withDataProp('data')
 
+		this.dtColumns2 = [
+			DTColumnBuilder.newColumn('name').withTitle('店铺'),
+			DTColumnBuilder.newColumn('rmb').withTitle('预收'),
+			DTColumnBuilder.newColumn('count').withTitle('订单量')
+		]
 
-		// let Restaurants = this.API.service('restaurant')
-		// Restaurants.getList()
+		this.displayTable2 = true
+
+		// let Statistics = this.API.service('statistics', this.API.all('restaurant'))
+		// Statistics.getList()
 		// 	.then((response) => {
-
 		// 		let dataSet = response.plain()
-				
-		// 		this.dtOptions1 = DTOptionsBuilder.newOptions()
+		// 		this.dtOptions2 = DTOptionsBuilder.newOptions()
 		// 			.withOption('data', dataSet)
-		// 			.withOption('createdRow', createdRow1)
+		// 			.withOption('createRow', createdRow2)
 		// 			.withOption('responsive', true)
 		// 			.withBootstrap()
 
-		// 		this.dtColumns1 = [
-		// 			DTColumnBuilder.newColumn('seller').withTitle('店铺'),
-		// 			DTColumnBuilder.newColumn('users.name').withTitle('小主'),
-		// 			DTColumnBuilder.newColumn('variety').withTitle('菜肴'),
-		// 			DTColumnBuilder.newColumn('price').withTitle('RMB')
+		// 		this.dtColumns2 = [
+		// 			DTColumnBuilder.newColumn('name').withTitle('店铺'),
+		// 			DTColumnBuilder.newColumn('rmb').withTitle('预收'),
+		// 			DTColumnBuilder.newColumn('count').withTitle('订单量')
 		// 		]
 
-		// 		this.displayTable = true
+		// 		this.displayTable2 = true
 		// 	})
 
-		// 	let createdRow1 = (row) => {
-		// 		$compile(angular.element(row).contents())($scope)
-		// 	}
-
-		let Statistics = this.API.service('statistics', this.API.all('restaurant'))
-		Statistics.getList()
-			.then((response) => {
-				let dataSet = response.plain()
-				this.dtOptions2 = DTOptionsBuilder.newOptions()
-					.withOption('data', dataSet)
-					.withOption('createRow', createdRow2)
-					.withOption('responsive', true)
-					.withBootstrap()
-
-				this.dtColumns2 = [
-					DTColumnBuilder.newColumn('name').withTitle('店铺'),
-					DTColumnBuilder.newColumn('rmb').withTitle('预收'),
-					DTColumnBuilder.newColumn('count').withTitle('订单量')
-				]
-
-				this.displayTable2 = true
-			})
-
-		let createdRow2 = (row) => {
-			$compile(angular.element(row).contents())($scope)
-		}
+		// let createdRow2 = (row) => {
+		// 	$compile(angular.element(row).contents())($scope)
+		// }
 
 		$scope.$on("dateTimePicker", function(event, data){
 			event
 			data
-			// this.$log.info($scope)
 		})
 
-		this.$log.info(this.dtInstance)
+		// this.$log.info(this.dtInstance)
 	}
 
 	$onInit () {}
@@ -110,84 +86,38 @@ class UserOrderListController {
 			})
 	}
 
-	newPromise(Restaurants) {
-		console.log(Restaurants.post({
-			'starttime' : this.dateTime1,
-			'endtime' : this.dateTime2
-			}))
-		return Restaurants.post({
-			'starttime' : this.dateTime1,
-			'endtime' : this.dateTime2
-			})
+	reloadData() {
+
+		this.dtInstance.rerender() 
 	}
-	submit(){
-		let $compile = this.$compile
-		let $state = this.$state
-		let $scope = this.$scope
-		let DTOptionsBuilder = this.DTOptionsBuilder
-		let DTColumnBuilder = this.DTColumnBuilder
+
+	submitOrderList(){
+
+		let dateTime1 = this.dateTime1
+		let dateTime2 = this.dateTime2
+
 		let Restaurants = this.API.service('restaurant')
-		Restaurants.post({
-			starttime: this.dateTime1,
-			endtime: this.dateTime2
-		}).then((response) => {
+		this.dtInstance.changeData(function(){
+			return Restaurants.getList({
+						starttime: dateTime1,
+						endtime: dateTime2
+					})
+		})
+	}
 
-				let dataSet = response.plain()
-				
-				// this.dtOptions1 = this.dtOptions1
-				// 	.withOption('destroy', true)
-				// 	.withOption('data', dataSet)
-				// 	.withOption('createdRow', this.createdRow1)
-				// 	.withOption('responsive', true)
-				// 	.withBootstrap()
+	submitOrderInfo() {
 
-				this.dtOptions1 = DTOptionsBuilder.newOptions()
-					.withDataProp('data')
-					.withOption('responsive', true)
-					.withBootstrap()
+		let dateTime3 = this.dateTime3
+		let dateTime4 = this.dateTime4
 
-				this.dtColumns1 = [
-					DTColumnBuilder.newColumn('seller').withTitle('店铺'),
-					DTColumnBuilder.newColumn('users.name').withTitle('小主'),
-					DTColumnBuilder.newColumn('variety').withTitle('菜肴'),
-					DTColumnBuilder.newColumn('price').withTitle('RMB')
-				]
+		let Statistics = this.API.service('statistics', this.API.all('restaurant'))
 
-				this.displayTable = true
-
+		this.dtInstance.changeData(function(){
+			return Statistics.getList({
+				starttime : dateTime3,
+				endtime : dateTime4
 			})
-
-			let createdRow1 = (row) => {
-				$compile(angular.element(row).contents())($scope)
-			}
-
-			// 	// this.dtColumns1 = [
-			// 	// 	DTColumnBuilder.newColumn('seller').withTitle('店铺'),
-			// 	// 	DTColumnBuilder.newColumn('users.name').withTitle('小主'),
-			// 	// 	DTColumnBuilder.newColumn('variety').withTitle('菜肴'),
-			// 	// 	DTColumnBuilder.newColumn('price').withTitle('RMB')
-			// 	// ]
-
-			// 	// this.displayTable = true
-			// 	// var resetPaging = true
-   //  //    			this.dtInstance.reloadData(function(){
-   //  //    				console.log("reloadData")
-   //  //    			}, resetPaging)
-
-			// 	// this.dtInstance.changeData(dataSet.$promise)
-
-			// 	// this.dtInstance.rerender();
-   //  // 			let resetPaging = true;
-			// 	// this.dtInstance.changeData(function(){
-			// 	// 	this.dtOptions1.$promise;
-			// 	// });
-			// 	// // $scope.$apply()
-
-			// })
-
-			let createdRow = (row) => {
-				$compile(angular.element(row).contents())($scope)
-			}
+		})
 	}
 
 }

@@ -190,6 +190,39 @@ export function RoutesConfig ($stateProvider, $urlRouterProvider) {
           }
         }
     })
+    .state('app.userweeklog', {
+        url: '/user-week-log',
+        data: {
+          auth:true
+        },
+        views: {
+          'main@app': {
+            template: '<user-week-log></user-week-log>'
+          }
+        }
+    })
+    .state('app.userweekloglist', {
+        url: '/user-week-log-list',
+        data: {
+          auth:true
+        },
+        views: {
+          'main@app': {
+            template: '<user-week-log-list></user-week-log-list>'
+          }
+        }
+    })
+    .state('app.userweeklogmanager', {
+        url: '/user-week-log-manager',
+        data: {
+          auth:true
+        },
+        views: {
+          'main@app': {
+            template: '<user-week-log-manager></user-week-log-manager>'
+          }
+        }
+    })
     .state('app.userlist', {
       url: '/user-lists',
       data: {

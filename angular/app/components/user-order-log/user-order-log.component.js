@@ -2,32 +2,25 @@ class UserOrderLogController {
 	constructor ($scope, $log, API, DTOptionsBuilder, DTColumnBuilder, $compile) {
 		this.API = API
 		this.$log = $log
+		this.dateTime1 = ""
+		this.dateTime2 = ""
+		this.dtInstance = {}
+
 		let RestaurantLog = this.API.service('log', this.API.all('restaurant'))
-		RestaurantLog.getList()
-			.then((response) => {
-				let dataSet = response.plain()
-				this.dtOptions = DTOptionsBuilder.newOptions()
-					.withOption('data', dataSet)
-					.withOption('createdRow', createdRow)
-					.withOption('responsive', true)
-					.withBootstrap()
+		
+		this.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
+			return RestaurantLog.getList()
+		}).withPaginationType('full_numbers').withDataProp('data')
 
-				this.dtColumns = [
-					DTColumnBuilder.newColumn('seller').withTitle('店铺'),
-					DTColumnBuilder.newColumn('users.name').withTitle('小主'),
-					DTColumnBuilder.newColumn('variety').withTitle('菜肴'),
-					DTColumnBuilder.newColumn('price').withTitle('RMB'),
-					DTColumnBuilder.newColumn('created_at').withTitle('日期')
-				]
+		this.dtColumns = [
+			DTColumnBuilder.newColumn('seller').withTitle('店铺'),
+			DTColumnBuilder.newColumn('users.name').withTitle('小主'),
+			DTColumnBuilder.newColumn('variety').withTitle('菜肴'),
+			DTColumnBuilder.newColumn('price').withTitle('RMB'),
+			DTColumnBuilder.newColumn('created_at').withTitle('日期')
+		]
 
-				this.displayTable = true
-
-			})
-
-			let createdRow = (row) => {
-				$compile(angular.element(row).contents())($scope)
-			}
-
+		this.displayTable = true
 	}
 
 	$onInit () {}
@@ -39,6 +32,21 @@ class UserOrderLogController {
 				response
 				this.$log.info("success ！")
 			})
+	}
+
+	submit () {
+
+		let startTime = this.dateTime1;
+		let endTime = this.dateTime2;
+
+		let RestaurantLog = this.API.service('log', this.API.all('restaurant'))
+
+		this.dtInstance.changeData(function(){
+			return RestaurantLog.getList({
+				starttime : startTime,
+				endtime : endTime
+			})
+		})
 	}
 }
 

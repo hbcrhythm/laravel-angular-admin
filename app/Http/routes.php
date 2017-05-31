@@ -45,3 +45,7 @@ $api->group(['middleware' => ['api', 'api.auth']], function($api) {
 $api->group(['middleware' => ['api', 'api.auth']], function($api){
     $api->controller('restaurant', 'RestaurantController');
 });
+
+$api->group(['middleware' => ['api', 'api.auth']], function($api){
+    $api->controller('userlog', 'UserLogController');
+});

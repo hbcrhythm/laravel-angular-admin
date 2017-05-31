@@ -25,7 +25,7 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
-       <li class="treeview">
+       <li class="treeview" ng-show="vm.can('manage.restaurant')">
         <a href="javascript:void(0)">
           <i class="fa fa-cutlery"></i> <span>Restaurants</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -35,6 +35,20 @@
           <li class="active"><a ui-sref="app.userorderlog"><i class="fa fa-circle-o"></i> <span>Order Log</span></a></li>
         </ul>
       </li>
+      
+      <li class="treeview" ng-show="vm.can('manage.weeklog')">
+          <a href="javascript:void(0)">
+            <i class="fa fa-cutlery"></i> <span>Week Logs</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a ui-sref="app.userweeklog"><i class="fa fa-circle-o"></i><span>Log</span></a></li>
+            <li class="active"><a ui-sref="app.userweekloglist"><i class="fa fa-circle-o"></i><span>Log List</span></a>
+            </li>
+            <li class="active"><a ui-sref="app.userweeklogmanager"><i class="fa fa-circle-o"></i><span>Log Manager</span></a>
+            </li>
+          </ul>
+      </li>
+      
       <li class="treeview" ng-show="vm.can('manage.users')">
         <a href="javascript:void(0)">
           <i class="fa fa-users"></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i>

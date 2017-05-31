@@ -49,15 +49,28 @@ class RestaurantController extends Controller
 	 * Get All Orders
 	 *
 	 */
-	public function getIndex () {
+	public function getIndex (Request $request) {
+		
+		$only = $request->only('starttime', 'endtime');
 
-		$restaurant = Restaurant::with('users')->orderBy('seller', 'desc')->get();
+		if(empty($only['starttime'])){
+			$restaurant = Restaurant::with('users')->orderBy('seller', 'desc')->get();
+		}else{
+			$restaurant = Restaurant::with('users')->where('created_at', '>=', Carbon::createFromTimestamp($only['starttime'], "Asia/Shanghai"))->where('created_at', '<=', Carbon::createFromTimestamp($only['endtime'], "Asia/Shanghai"))->orderBy('seller', 'desc')->get();
+		}
 
 		return response()->success(compact('restaurant'));
 	}
 
-	public function getStatistics () {
-		$restaurant = Restaurant::with('users')->get();
+	public function getStatistics (Request $request) {
+		
+		$only = $request->only('starttime', 'endtime');
+
+		if(empty($only['starttime'])){
+			$restaurant = Restaurant::with('users')->get();
+		}else{
+			$restaurant = Restaurant::with('users')->where('created_at', '>=', Carbon::createFromTimestamp($only['starttime'], "Asia/Shanghai"))->where('created_at', '<=', Carbon::createFromTimestamp($only['endtime'], "Asia/Shanghai"))->get();
+		}
 
 		$arrKind = array();
 		foreach ($restaurant as $value) {
@@ -127,9 +140,25 @@ class RestaurantController extends Controller
 		return response()->success(compact('excel'));
 	}
 
-	public function getLog () {
+	public function getLog (Request $request) {
+
+		$this->validate($request, [
+			'starttime',
+			'endtime'
+		]);
+		
+		$only = $request->only('starttime', 'endtime');
+
+		$startTime = $only['starttime'];
+		$endTime = $only['endtime'];
+
 		$user = Auth::user();
-		$log = Restaurant::with('users')->where('role_id', $user['id'])->get();
+
+		if(empty($startTime)){
+			$log = Restaurant::with('users')->where('role_id', $user['id'])->get();
+		}else{
+			$log = Restaurant::with('users')->where('role_id', $user['id'])->where('created_at', ">=", Carbon::createFromTimestamp($only['starttime'], "Asia/Shanghai"))->where('created_at', "<=", Carbon::createFromTimestamp($only['endtime'], "Asia/Shanghai"))->get();
+		}
 
 		return response()->success(compact('log'));
 	}

@@ -1,0 +1,41 @@
+<section class="content-header">
+	<h1>Week Log<small> 此界面为日记界面哦！</small> </h1>
+	<ol class="breadcrumb">
+		<li><a ui-self="app.langing"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">User Log</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">User Log</h3>
+					<div class="box_tools pull-right">
+						<button type="button" class="btn btn-success btn-xs" ng-click="vm.save()"><i class="fa fa-send-o"></i> submit </button>
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+					</div>
+				</div>
+				
+				<div>
+				<label class="label label-info">日记时间</label>
+				<br/>
+				<input type="text"
+					class="form-control"
+					data-date-time-picker
+					data-date-time="vm.dateTime"
+					/>
+				</div>
+
+				<div>
+				<form class="form-horizontal" name="logForm" ng-submit="vm.save(logForm.$valid)" novalidate>
+					<div class="box-body">
+						<div text-angular ng-model="htmlVariable"></div>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
