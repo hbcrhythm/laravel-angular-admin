@@ -10,6 +10,7 @@ new Task('phpcs', function () {
       standard: 'PSR2',
       warningSeverity: 0
     }))
+    .on('error', errorHandler)
     .pipe(phpcs.reporter('log'))
 })
 
@@ -20,5 +21,11 @@ new Task('phpcs:config', function () {
       standard: 'PSR2',
       warningSeverity: 0
     }))
+    .on('error', errorHandler)
     .pipe(phpcs.reporter('log'))
 })
+
+function errorHandler (error) {
+  console.log(error.toString());
+  this.emit('end');
+}
