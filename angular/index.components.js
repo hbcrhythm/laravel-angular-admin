@@ -19,6 +19,7 @@ import { UserRolesAddComponent } from './app/components/user-roles-add/user-role
 import { UserRolesComponent } from './app/components/user-roles/user-roles.component'
 import { UserListsComponent } from './app/components/user-lists/user-lists.component'
 import { DashboardComponent } from './app/components/dashboard/dashboard.component'
+import { DashboardComponent2 } from './app/components/dashboard2/dashboard2.component'
 import { NavSidebarComponent } from './app/components/nav-sidebar/nav-sidebar.component'
 import { NavHeaderComponent } from './app/components/nav-header/nav-header.component'
 import { LoginLoaderComponent } from './app/components/login-loader/login-loader.component'
@@ -55,6 +56,7 @@ angular.module('app.components')
   .component('userRoles', UserRolesComponent)
   .component('userLists', UserListsComponent)
   .component('dashboard', DashboardComponent)
+  .component('dashboard2', DashboardComponent2)
   .component('navSidebar', NavSidebarComponent)
   .component('navHeader', NavHeaderComponent)
   .component('loginLoader', LoginLoaderComponent)

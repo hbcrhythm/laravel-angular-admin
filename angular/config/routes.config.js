@@ -41,6 +41,17 @@ export function RoutesConfig ($stateProvider, $urlRouterProvider) {
         }
       }
     })
+    .state('app.dashboard2', {
+      url: '/dashboard2',
+      data: {
+        auth: true
+      },
+      views: {
+        'main@app': {
+          template: '<dashboard2></dashboard2>'
+        }
+      }
+    })
     .state('app.tablessimple', {
       url: '/tables-simple',
       data: {
