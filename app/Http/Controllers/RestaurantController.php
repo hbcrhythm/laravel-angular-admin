@@ -50,7 +50,7 @@ class RestaurantController extends Controller
 	 *
 	 */
 	public function getIndex (Request $request) {
-		
+		Log::info("getindex");
 		$only = $request->only('starttime', 'endtime');
 
 		if(empty($only['starttime'])){

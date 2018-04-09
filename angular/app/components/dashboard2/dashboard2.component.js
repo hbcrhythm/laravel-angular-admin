@@ -9,6 +9,13 @@ class DashboardController2 {
     
   click(){
     this.$log.info("click")
+    let HotUpdate = this.API.service('hotUpdate', this.API.all('gamemanager'))
+    HotUpdate.post({
+      }).then(function () {
+        this.$log.info("click success !")
+      }, function(error) {
+        this.$log.info("click fail !")
+      })
   }
 }
 

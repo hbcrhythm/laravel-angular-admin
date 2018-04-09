@@ -46,6 +46,15 @@ $api->group(['middleware' => ['api', 'api.auth']], function($api){
     $api->controller('restaurant', 'RestaurantController');
 });
 
+//注意这里是post
+$api->group(['middleware' => ['api']], function($api){
+    $api->post('gamemanager/hotUpdate', 'GameManagerController@hotUpdate');
+});
+
+$api->group(['middleware' => ['api']], function($api){
+    $api->controller('gamemanager', 'GameManagerController');
+});
+
 $api->group(['middleware' => ['api', 'api.auth']], function($api){
     $api->controller('userlog', 'UserLogController');
 });
