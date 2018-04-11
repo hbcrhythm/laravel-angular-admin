@@ -50,6 +50,10 @@ export function RoutesConfig ($stateProvider, $urlRouterProvider) {
         'main@app': {
           template: '<dashboard2></dashboard2>'
         }
+      },
+      params: {
+        alerts: null,
+        data: null
       }
     })
     .state('app.tablessimple', {

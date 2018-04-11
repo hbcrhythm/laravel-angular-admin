@@ -39,4 +39,20 @@
       </div>
     </div>
   </div>
+
+  <div ng-if="vm.alerts" class="alert alert-{{alert.type}}" ng-repeat="alert in vm.alerts">
+    <h4>{{alert.title}}</h4>
+    <p>{{alert.msg}}</p>
+  </div>
+   <!-- <div class="box box-warning">
+    <div class="box-header with-border">
+      <h3 class="box-title">操作结果</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+      {{vm.opResult}}
+    </div>
+  </div> -->
 </section>
